@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+jar{
+    manifest {
+        attributes 'Implementation-Title': 'biblioteca',
+                'Main-Class': 'com.twu.biblioteca.BibliotecaApp'
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+

@@ -1,0 +1,6 @@
+/out
+.gradle
+*.bat
+/build
+workspace.xml
+*.DS_Store
