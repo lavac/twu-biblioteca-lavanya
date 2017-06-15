@@ -1,10 +1,16 @@
 package com.twu.biblioteca;
 
+import com.twu.outputwriter.ConsoleOutputWriter;
+import com.twu.outputwriter.OutputWriter;
+
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+
 public class BibliotecaApp {
 
     public static void main(String[] args) {
-        Biblioteca biblioteca = new Biblioteca();
-        biblioteca.startBiblioteca();
+        OutputWriter outputWriter = new ConsoleOutputWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        new Biblioteca().startBiblioteca(outputWriter);
     }
 }
 
