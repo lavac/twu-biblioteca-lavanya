@@ -12,9 +12,9 @@ public class ListOfBooks {
     }
 
     private void MakeAListOfBooks() {
-            books.add(new Book("2 States"));
-            books.add(new Book("The Alchemist"));
-            books.add(new Book("Five point someone"));
+            books.add(new Book("2 States", "Chetan Bhagat", 2009));
+            books.add(new Book("The Alchemist", "Poelo coehlo", 1999));
+            books.add(new Book("Five point someone", "unknown", 2012));
     }
 
     public List<Book> getListOfBooks() {

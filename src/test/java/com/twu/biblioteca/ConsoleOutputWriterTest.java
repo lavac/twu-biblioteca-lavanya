@@ -4,7 +4,6 @@ import com.twu.outputwriter.ConsoleOutputWriter;
 import org.junit.Test;
 import java.io.BufferedWriter;
 import java.io.StringWriter;
-
 import static org.junit.Assert.assertEquals;
 
 public class ConsoleOutputWriterTest {

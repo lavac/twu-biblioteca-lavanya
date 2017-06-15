@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.testModules.TestConsoleOutputWriter;
 import org.junit.Test;
 import java.io.*;
 import java.util.ArrayList;
@@ -7,15 +8,9 @@ import static org.junit.Assert.assertEquals;
 
 public class BibliotecaTest {
 
-    @Test
-    public void shouldGetWelcomeMessage() {
-        String expectedMessage = "Hi, Welcome to Biblioteca ...";
-        Biblioteca biblioteca = new Biblioteca();
-        assertEquals(expectedMessage, biblioteca.getWelcomeMessage());
-    }
 
     @Test
-    public void shouldReturnWelcomeMessageAndListOfboksOnceStarted(){
+    public void shouldDisplayMenuItemsOnWelcomeScreen(){
         Biblioteca biblioteca = new Biblioteca();
         StringWriter stringWriter = new StringWriter();
         BufferedWriter bufferedWriter = new BufferedWriter(stringWriter);
@@ -23,11 +18,12 @@ public class BibliotecaTest {
                 (bufferedWriter);
         ArrayList<String> expectedOutput = new ArrayList<>();
         expectedOutput.add("Hi, Welcome to Biblioteca ...");
-        expectedOutput.add("2 States");
-        expectedOutput.add("The Alchemist");
-        expectedOutput.add("Five point someone");
+        expectedOutput.add(new Book("2 States", "Chetan Bhagat",2009).toString());
+        expectedOutput.add(new Book("The Alchemist", "Poelo coehlo",1999).toString());
+        expectedOutput.add(new Book("Five point someone", "unknown",2012)
+                                   .toString());
 
-        biblioteca.startBiblioteca(outputWriter);
+        biblioteca.start(outputWriter);
 
         assertEquals(expectedOutput, outputWriter.getOutput());
     }

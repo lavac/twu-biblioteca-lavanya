@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.testModules;
 
 import com.twu.outputwriter.ConsoleOutputWriter;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class TestConsoleOutputWriter extends ConsoleOutputWriter {
 
     ArrayList<String> output = new ArrayList<>();
-    TestConsoleOutputWriter(BufferedWriter bufferedWriter) {
+    public TestConsoleOutputWriter(BufferedWriter bufferedWriter) {
         super(bufferedWriter);
     }
 
@@ -17,7 +17,7 @@ public class TestConsoleOutputWriter extends ConsoleOutputWriter {
         output.add(outputString);
         }
 
-        ArrayList<String> getOutput() {
+        public ArrayList<String> getOutput() {
             return output;
         }
 
