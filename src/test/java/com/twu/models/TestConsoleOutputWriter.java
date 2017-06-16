@@ -4,10 +4,11 @@ import com.twu.outputwriter.ConsoleOutputWriter;
 
 import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestConsoleOutputWriter extends ConsoleOutputWriter {
 
-    ArrayList<String> output = new ArrayList<>();
+    List<String> output = new ArrayList<>();
     public TestConsoleOutputWriter(BufferedWriter bufferedWriter) {
         super(bufferedWriter);
     }
@@ -17,7 +18,7 @@ public class TestConsoleOutputWriter extends ConsoleOutputWriter {
         output.add(outputString);
         }
 
-        public ArrayList<String> getOutput() {
+        public List<String> getOutput() {
             return output;
         }
 

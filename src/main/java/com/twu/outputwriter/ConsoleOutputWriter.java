@@ -19,6 +19,4 @@ public class ConsoleOutputWriter implements OutputWriter {
             e.printStackTrace();
         }
     }
-
-
 }
