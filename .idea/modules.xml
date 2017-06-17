@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BibliotecaApp.iml" filepath="$PROJECT_DIR$/.idea/modules/BibliotecaApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BibliotecaApp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/BibliotecaApp_main.iml" group="BibliotecaApp" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BibliotecaApp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/BibliotecaApp_test.iml" group="BibliotecaApp" />
-      <module fileurl="file://$PROJECT_DIR$/biblioteca.iml" filepath="$PROJECT_DIR$/biblioteca.iml" />
     </modules>
   </component>
 </project>

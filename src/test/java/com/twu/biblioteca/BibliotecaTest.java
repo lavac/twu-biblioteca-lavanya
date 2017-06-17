@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.inputReader.ConsoleInputReader;
 import com.twu.models.TestConsoleOutputWriter;
 import org.junit.Test;
 import java.io.*;
@@ -8,23 +9,28 @@ import static org.junit.Assert.assertEquals;
 
 public class BibliotecaTest {
 
-
     @Test
     public void shouldDisplayMenuItemsOnWelcomeScreen(){
-        Biblioteca biblioteca = new Biblioteca();
+        ArrayList<String> expectedOutput = new ArrayList<>();
+        String quitOption = "2";
+        expectedOutput.add("Hi, Welcome to Biblioteca ...");
+        expectedOutput.add("1 : ListBooks");
+        expectedOutput.add("2 : Quit");
+        expectedOutput.add("Thank you for using biblioteca :)");
+
         StringWriter stringWriter = new StringWriter();
         BufferedWriter bufferedWriter = new BufferedWriter(stringWriter);
-        TestConsoleOutputWriter outputWriter = new TestConsoleOutputWriter
-                (bufferedWriter);
-        ArrayList<String> expectedOutput = new ArrayList<>();
-        expectedOutput.add("Hi, Welcome to Biblioteca ...");
-        expectedOutput.add(new Book("2 States", "Chetan Bhagat",2009).toString());
-        expectedOutput.add(new Book("The Alchemist", "Poelo coehlo",1999).toString());
-        expectedOutput.add(new Book("Five point someone", "unknown",2012)
-                                   .toString());
+        TestConsoleOutputWriter outputWriter = new TestConsoleOutputWriter(bufferedWriter);
 
-        biblioteca.start(outputWriter);
+        StringReader stringReader = new StringReader(quitOption);
+        BufferedReader bufferedReader = new BufferedReader(stringReader);
+        ConsoleInputReader inputReader = new ConsoleInputReader(bufferedReader);
+
+        Biblioteca biblioteca = new Biblioteca(inputReader,outputWriter);
+
+        biblioteca.start();
 
         assertEquals(expectedOutput, outputWriter.getOutput());
     }
+
 }

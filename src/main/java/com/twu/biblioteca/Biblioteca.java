@@ -1,56 +1,53 @@
 package com.twu.biblioteca;
 
 import com.twu.inputReader.InputReader;
+import com.twu.menu.Menu;
+import com.twu.menu.MenuOptionProvider;
 import com.twu.outputwriter.OutputWriter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 public class Biblioteca {
 
-    final static String stringFormat = String.format("%-20s  %-20s %s" , "Name",
-            "Author",
-            "YOP");
     OutputWriter writer;
     InputReader reader;
-
-    List<Book> books = new ArrayList<>();
+    LibrarySystem library;
+    final static String QuitOption = "2";
 
     Biblioteca(InputReader reader, OutputWriter writer) {
-        books = new BookInventory().getListOfBooks();
         this.reader = reader;
         this.writer = writer;
+        library = new LibrarySystem();
     }
 
-    public void start() {
-        writer.write(getWelcomeMessage());
+    void start() {
+        writer.write(library.getWelcomeMessage());
         Menu menu = new Menu();
-        menu.displayMenu(writer);
-        selectOption();
-        }
+        String userInput;
+        do {
+            displayMenu(menu.getMenu());
+            userInput = readUserInput();
+            List<String> output = library.executeMenuOptionForUserInput(userInput);
+            DisplayResult(output);
+        }while (!userInput.equals(QuitOption));
+    }
 
-    void selectOption() {
-
-        while(true) {
-            String str = reader.read();
-            switch (str) {
-                case "List books":
-                    displayAvailableBooks();
-                    break;
-                default:
-                    writer.write("Invalid Option");
-            }
+    private void displayMenu(Map<String, MenuOptionProvider> menuOptions) {
+        for (Map.Entry<String, MenuOptionProvider> option : menuOptions.entrySet()) {
+            MenuOptionProvider menuOption = option.getValue();
+            writer.write(option.getKey() + " : " + menuOption.getMenuOption());
         }
     }
 
-    String getWelcomeMessage() {
-        String welcomeMessage = "Hi, Welcome to Biblioteca ...";
-        return welcomeMessage;
-    }
-
-    void displayAvailableBooks() {
-        writer.write(stringFormat);
-        for (Book book : books) {
-            writer.write(book.toString());
+    private void DisplayResult(List<String> output) {
+        for (String result : output) {
+            writer.write(result);
         }
     }
+
+    private String readUserInput() {
+        return reader.read();
+    }
+
 }

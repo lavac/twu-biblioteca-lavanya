@@ -1,8 +1,5 @@
-package com.twu.biblioteca.inputReader;
-
-
-import java.util.ArrayList;
+package com.twu.inputReader;
 
 public interface InputReader {
-String read();
+    String read();
 }

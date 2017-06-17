@@ -1,25 +1,24 @@
-package com.twu.biblioteca.inputReader;
+package com.twu.inputReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class ConsoleInputReader implements InputReader {
+public class ConsoleInputReader implements InputReader{
 
-        private BufferedReader bufferedReader;
+    private BufferedReader bufferedReader;
 
-        public ConsoleInputReader(BufferedReader bufferedReader) {
-            this.bufferedReader = bufferedReader;
+    public ConsoleInputReader(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
+    }
+
+    @Override
+    public String read() {
+        String line = null;
+        try {
+            line = bufferedReader.readLine();
         }
-
-        @Override
-        public String read() {
-            String line = "";
-            try {
-                 line = bufferedReader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return line;
+         catch (IOException e) {
         }
+        return line;
+    }
 }

@@ -12,11 +12,12 @@ public class Book {
     }
 
     public String toString() {
-        return String.format("%-20s | %-20s | %s" , name, author,
-                                         yearOfPublication );
+        return String.format("%-20s | %-20s | %s", name, author,
+                             yearOfPublication
+        );
     }
 
-    public boolean equals(Object obj) {
+     public boolean equals(Object obj) {
         Book book = (Book) obj;
         if (this.name == book.name)
             return true;
