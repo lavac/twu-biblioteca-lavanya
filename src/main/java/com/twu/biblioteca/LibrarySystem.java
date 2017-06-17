@@ -17,14 +17,11 @@ import java.util.List;
     }
 
     public List<String> executeMenuOptionForUserInput(String userInput) {
-        List<String> output = null;
-        if (menu.getMenu().containsKey(userInput)) {
-            MenuOptionProvider menuOption = menu.getMenu().get(userInput);
-             output = menuOption.executeMenuOption();
-        }
+        List<String> output;
+        MenuOptionProvider menuOption = menu.getMenuOption(userInput);
+         output = menuOption.executeMenuOption();
         return output;
     }
-
 }
 
 

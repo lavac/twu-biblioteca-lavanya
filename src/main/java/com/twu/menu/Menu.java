@@ -20,4 +20,7 @@ public class Menu {
         return menuOptions;
     }
 
+    public MenuOptionProvider getMenuOption(String userInput){
+        return menuOptions.getOrDefault(userInput, new InvalidMenuOption());
+    }
 }
