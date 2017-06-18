@@ -8,8 +8,8 @@ import static com.twu.constants.Constants.INVALID_OPTION_MESSAGE;
 public class InvalidOption implements MenuOptionProvider {
 
     @Override
-    public Output executeMenuOption(BookInventory bookInventory, InputReader reader) {
-        return new Output(INVALID_OPTION_MESSAGE);
+    public Response executeMenuOption(BookInventory bookInventory, InputReader reader) {
+        return new Response(INVALID_OPTION_MESSAGE);
     }
 
     @Override

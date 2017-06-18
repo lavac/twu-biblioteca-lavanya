@@ -11,10 +11,10 @@ public class LibrarySystemTest {
 
     @Test
     public void librarySystemShouldPerformActionAsPerTheUserInput() {
-        String userInput = "3";
+        String userInput = "4";
         LibrarySystem librarySystem = new LibrarySystem(null, null);
         List<String>  expectedOutput = new ArrayList<>();
         expectedOutput.add("Thank you for using biblioteca :)");
-        assertEquals(expectedOutput, librarySystem.performAction(userInput).getOutput());
+        assertEquals(expectedOutput, librarySystem.performAction(userInput).getResponse());
     }
 }

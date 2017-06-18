@@ -13,20 +13,19 @@ public class ListBookOptionTest {
 
     @Test
     public void shouldDisplayAvailableBooks() {
-
         ListBooks listBookOption = new ListBooks();
-        List<String> expectedBooks = new ArrayList<>();
+        List<String> expectedResult = new ArrayList<>();
         final String stringFormat = String.format("%-20s  %-20s %s", "Name",
                                                   "Author",
                                                   "YOP"
         );
 
-        expectedBooks.add(stringFormat);
+        expectedResult.add(stringFormat);
         BookInventory bookInventory = new BookInventory();
         for (Book book : bookInventory.getAvailableBooks())
-            expectedBooks.add(book.toString());
+            expectedResult.add(book.toString());
 
-        assertEquals(expectedBooks, listBookOption.executeMenuOption(bookInventory, null).getOutput());
+        assertEquals(expectedResult, listBookOption.executeMenuOption(bookInventory, null).getResponse());
     }
 
     @Test
@@ -36,6 +35,4 @@ public class ListBookOptionTest {
 
         assertEquals(expectedMenuOption, listBooks.getMenuOption());
     }
-
-
 }

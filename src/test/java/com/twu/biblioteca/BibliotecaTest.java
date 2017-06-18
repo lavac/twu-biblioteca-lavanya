@@ -11,12 +11,13 @@ public class BibliotecaTest {
     @Test
     public void shouldDisplayMenuItemsOnWelcomeScreen(){
         ArrayList<String> expectedOutput = new ArrayList<>();
-        String quitOption = "3";
         expectedOutput.add("Hi, Welcome to Biblioteca ...");
         expectedOutput.add("1 : List books");
         expectedOutput.add("2 : Check out");
-        expectedOutput.add("3 : Quit");
+        expectedOutput.add("3 : Return");
+        expectedOutput.add("4 : Quit");
         expectedOutput.add("Thank you for using biblioteca :)");
+        String quitOption = "4\n";
 
         TestConsoleOutputWriter outputWriter = new TestConsoleOutputWriter();
         TestConsoleInputReader inputReader = new TestConsoleInputReader(quitOption);
@@ -32,7 +33,7 @@ public class BibliotecaTest {
     public void shouldKeepOnDisplayingMenuUntilUserQuit() {
         String optionOne = "1\n";
         String optionTwo = "1\n";
-        String optionThree = "3\n";
+        String optionThree = "4\n";
         String inputOptions = optionOne + optionTwo + optionThree;
         int expectedNumberOfIterations = 3;
 

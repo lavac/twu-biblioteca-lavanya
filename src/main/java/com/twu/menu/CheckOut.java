@@ -8,10 +8,9 @@ import static com.twu.constants.Constants.CHECK_OUT_MENU_OPTION;
 public class CheckOut implements MenuOptionProvider {
 
     @Override
-    public Output executeMenuOption(BookInventory bookInventory, InputReader reader) {
+    public Response executeMenuOption(BookInventory bookInventory, InputReader reader) {
         String bookToBeCheckedOut = reader.read();
-        String result = bookInventory.checkOut(bookToBeCheckedOut);
-        return new Output(result);
+        return bookInventory.checkOut(bookToBeCheckedOut);
     }
 
     @Override

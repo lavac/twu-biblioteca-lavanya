@@ -3,15 +3,16 @@ package com.twu.biblioteca;
 import com.twu.inputReader.InputReader;
 import com.twu.menu.Menu;
 import com.twu.menu.MenuOptionProvider;
-import com.twu.menu.Output;
+import com.twu.menu.Response;
 import com.twu.outputwriter.OutputWriter;
+
 import static com.twu.constants.Constants.WELCOME_MESSAGE;
 
 class LibrarySystem {
-    Menu menu;
-    BookInventory bookInventory;
-    OutputWriter writer;
-    InputReader reader;
+    private BookInventory bookInventory;
+    private OutputWriter writer;
+    private InputReader reader;
+    private Menu menu;
 
     LibrarySystem(InputReader reader, OutputWriter writer) {
         this.reader = reader;
@@ -20,17 +21,16 @@ class LibrarySystem {
         bookInventory = new BookInventory();
     }
 
-    String getWelcomeMessage() {
-        return WELCOME_MESSAGE;
+    Response getWelcomeMessage() {
+        return new Response(WELCOME_MESSAGE);
     }
 
-    public Output performAction(String userInput) {
+    Response performAction(String userInput) {
         MenuOptionProvider menuOption = new Menu().getMenuOption(userInput);
-        Output output = menuOption.executeMenuOption(bookInventory, reader);
-        return output;
+        return menuOption.executeMenuOption(bookInventory, reader);
     }
 
-    public void displayUserOptions() {
+    void displayUserOptions() {
         menu.displayMenu(writer);
     }
 }

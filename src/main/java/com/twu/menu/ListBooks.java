@@ -3,28 +3,26 @@ package com.twu.menu;
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.BookInventory;
 import com.twu.inputReader.InputReader;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.twu.constants.Constants.LIST_BOOK_MENU_OPTION;
 import static com.twu.constants.Constants.STRING_FORMAT;
 
 public class ListBooks implements MenuOptionProvider {
 
     @Override
-    public Output executeMenuOption(BookInventory bookInventory, InputReader reader) {
+    public Response executeMenuOption(BookInventory bookInventory, InputReader reader) {
         List<Book> books = bookInventory.getAvailableBooks();
-        List<String> stringOfList = toStringList(books);
-        return new Output(stringOfList);
+        List<String> booksInStringForm = toStringForm(books);
+        return new Response(booksInStringForm);
     }
 
-    public List<String> toStringList(List<Book> books) {
-        List<String> stringList = new ArrayList<>();
-        stringList.add(STRING_FORMAT);
+    private List<String> toStringForm(List<Book> books) {
+        List<String> stringForm = new ArrayList<>();
+        stringForm.add(STRING_FORMAT);
         for (Book book : books)
-            stringList.add(book.toString());
-        return stringList;
+            stringForm.add(book.toString());
+        return stringForm;
     }
 
     public String getMenuOption() {

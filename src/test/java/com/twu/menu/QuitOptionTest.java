@@ -3,7 +3,6 @@ package com.twu.menu;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
-import com.twu.biblioteca.BookInventory;
 import org.junit.Test;
 
 public class QuitOptionTest {
@@ -16,8 +15,7 @@ public class QuitOptionTest {
 
         expectedOutput.add(quitMessage);
 
-        BookInventory bookInventory = null;
-        assertEquals(expectedOutput, quitOption.executeMenuOption(bookInventory, null).getOutput());
+        assertEquals(expectedOutput, quitOption.executeMenuOption(null, null).getResponse());
     }
 
     @Test

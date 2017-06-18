@@ -1,6 +1,6 @@
 package com.twu.inputOuput;
 
-import com.twu.menu.Output;
+import com.twu.menu.Response;
 import com.twu.outputwriter.ConsoleOutputWriter;
 import org.junit.Test;
 import java.io.BufferedWriter;
@@ -17,7 +17,7 @@ public class ConsoleOutputWriterTest {
         String expectedMessage = "test output writer\n" ;
         String input = "test output writer";
 
-        outputWriter.write(new Output(input));
+        outputWriter.write(new Response(input));
 
         assertEquals(expectedMessage, stringWriter.toString());
     }

@@ -1,9 +1,9 @@
 package com.twu.constants;
 
 public class Constants {
-    public final static String QUIT_OPTION = "3";
+    public final static String QUIT_OPTION = "4";
     public final static String WELCOME_MESSAGE = "Hi, Welcome to Biblioteca ...";
-    public final static String CHECK_OUT_SUCCESS_MESSAGE = "Thank you! Enjoy the book";
+    public final static String CHECK_OUT_SUCCESS_MESSAGE = "Thank you! Enjoy the book.";
     public final static String CHECK_OUT_FAILURE_MESSAGE = "That book is not available.";
     public final static String CHECK_OUT_MENU_OPTION = "Check out";
     public final static String INVALID_OPTION_MESSAGE = "Select a valid option!";
@@ -14,4 +14,8 @@ public class Constants {
                                                              "Author",
                                                              "YOP"
     );
+    public static final String RETURN_SUCCESS_MESSAGE = "Thank you for returning the book." ;
+    public static final String RETURN_FAILURE_MESSAGE = "That is not a valid book to return.";
+    public static final String RETURN_MENU_OPTION = "Return" ;
+
 }

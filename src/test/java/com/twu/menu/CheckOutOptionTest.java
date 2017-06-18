@@ -14,9 +14,11 @@ public class CheckOutOptionTest {
     @Test
     public void checkedOutBookShouldNotBeDisplayedInAvailableBookList() {
         BookInventory bookInventory = new BookInventory();
-        String bookToBeCheckedOut = "The Alchemist\n";
+        String bookNameToBeCheckedOut = "The Alchemist\n";
+        Book bookToBeCheckedOut = new Book("The Alchemist", "Poulo coehlo", 1999);
         CheckOut checkOut = new CheckOut();
-        TestConsoleInputReader inputReader = new TestConsoleInputReader(bookToBeCheckedOut);
+
+        TestConsoleInputReader inputReader = new TestConsoleInputReader(bookNameToBeCheckedOut);
 
         checkOut.executeMenuOption(bookInventory, inputReader);
 
@@ -29,11 +31,12 @@ public class CheckOutOptionTest {
         List<Book> availableBooks = bookInventory.getAvailableBooks();
         String bookToBeCheckedOut = availableBooks.get(0).getName();
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("Thank you! Enjoy the book");
+        expectedResult.add("Thank you! Enjoy the book.");
 
         TestConsoleInputReader inputReader = new TestConsoleInputReader(bookToBeCheckedOut);
         CheckOut checkOut = new CheckOut();
-        assertEquals(expectedResult, checkOut.executeMenuOption(bookInventory, inputReader).getOutput());
+
+        assertEquals(expectedResult, checkOut.executeMenuOption(bookInventory, inputReader).getResponse());
     }
 
     @Test
@@ -46,6 +49,14 @@ public class CheckOutOptionTest {
         TestConsoleInputReader inputReader = new TestConsoleInputReader(bookToBeCheckedOut);
         CheckOut checkOut = new CheckOut();
 
-        assertEquals(expectedResult, checkOut.executeMenuOption(bookInventory, inputReader).getOutput());
+        assertEquals(expectedResult, checkOut.executeMenuOption(bookInventory, inputReader).getResponse());
+    }
+
+    @Test
+    public void shouldDisplayMenuOption() {
+        CheckOut checkOut = new CheckOut();
+        String expectedMenuOption = "Check out";
+
+        assertEquals(expectedMenuOption, checkOut.getMenuOption());
     }
 }
