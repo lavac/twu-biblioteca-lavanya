@@ -1,26 +1,28 @@
-package com.twu.biblioteca;
+package com.twu.menu;
 
-import com.twu.menu.QuitOption;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
+
+import com.twu.biblioteca.BookInventory;
 import org.junit.Test;
 
 public class QuitOptionTest {
 
     @Test
     public void shouldDisplayMessageBeforeQuit() {
-        QuitOption quitOption = new QuitOption();
+        Quit quitOption = new Quit();
         String quitMessage = "Thank you for using biblioteca :)";
         ArrayList<String> expectedOutput = new ArrayList<>();
 
         expectedOutput.add(quitMessage);
 
-        assertEquals(expectedOutput, quitOption.executeMenuOption());
+        BookInventory bookInventory = null;
+        assertEquals(expectedOutput, quitOption.executeMenuOption(bookInventory, null).getOutput());
     }
 
     @Test
     public void shouldDisplayMenuOption() {
-        QuitOption quitOption = new QuitOption();
+        Quit quitOption = new Quit();
         String expectedMenuOption = "Quit";
 
         assertEquals(expectedMenuOption, quitOption.getMenuOption());

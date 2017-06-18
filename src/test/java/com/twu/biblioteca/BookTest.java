@@ -14,11 +14,10 @@ public class BookTest {
         }
 
         @Test
-        public void shouldDisplayBookinStringFormat() {
+        public void shouldDisplayBookInStringFormat() {
             Book book=new Book("2 States", "Chetan Bhagat", 2009);
-            String expectedString = "2 States             | Chetan Bhagat        | 2009";
-            assertTrue(expectedString.equals(book.toString()));
-
+            String bookInStringFormat = "2 States             | Chetan Bhagat        | 2009";
+            assertTrue(bookInStringFormat.equals(book.toString()));
         }
 }
 

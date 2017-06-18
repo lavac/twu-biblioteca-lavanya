@@ -1,8 +1,9 @@
 package com.twu.menu;
 
-import java.util.List;
+import com.twu.biblioteca.BookInventory;
+import com.twu.inputReader.InputReader;
 
 public interface MenuOptionProvider {
-    List<String> executeMenuOption();
+    Output executeMenuOption(BookInventory bookInventory, InputReader reader);
     String getMenuOption();
 }

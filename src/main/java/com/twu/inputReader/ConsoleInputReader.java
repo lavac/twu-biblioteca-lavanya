@@ -3,9 +3,8 @@ package com.twu.inputReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ConsoleInputReader implements InputReader{
-
-    private BufferedReader bufferedReader;
+public class ConsoleInputReader implements InputReader {
+    private BufferedReader bufferedReader = null;
 
     public ConsoleInputReader(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
@@ -16,8 +15,7 @@ public class ConsoleInputReader implements InputReader{
         String line = null;
         try {
             line = bufferedReader.readLine();
-        }
-         catch (IOException e) {
+        } catch (IOException e) {
         }
         return line;
     }

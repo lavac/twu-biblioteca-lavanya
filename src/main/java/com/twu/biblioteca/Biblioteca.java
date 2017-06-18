@@ -1,53 +1,30 @@
 package com.twu.biblioteca;
 
 import com.twu.inputReader.InputReader;
-import com.twu.menu.Menu;
-import com.twu.menu.MenuOptionProvider;
+import com.twu.menu.Output;
 import com.twu.outputwriter.OutputWriter;
-import java.util.List;
-import java.util.Map;
-
+import static com.twu.constants.Constants.QUIT_OPTION;
 
 public class Biblioteca {
+    private OutputWriter writer;
+    private InputReader reader;
+    private LibrarySystem library;
 
-    OutputWriter writer;
-    InputReader reader;
-    LibrarySystem library;
-    final static String QuitOption = "2";
-
-    Biblioteca(InputReader reader, OutputWriter writer) {
+    public Biblioteca(InputReader reader, OutputWriter writer) {
         this.reader = reader;
         this.writer = writer;
-        library = new LibrarySystem();
+        library = new LibrarySystem(reader, writer);
     }
 
     void start() {
-        writer.write(library.getWelcomeMessage());
-        Menu menu = new Menu();
+        writer.write(new Output(library.getWelcomeMessage()));
         String userInput;
         do {
-            displayMenu(menu.getMenu());
-            userInput = readUserInput();
-            List<String> output = library.executeMenuOptionForUserInput(userInput);
-            DisplayResult(output);
-        }while (!userInput.equals(QuitOption));
-    }
-
-    private void displayMenu(Map<String, MenuOptionProvider> menuOptions) {
-        for (Map.Entry<String, MenuOptionProvider> option : menuOptions.entrySet()) {
-            MenuOptionProvider menuOption = option.getValue();
-            writer.write(option.getKey() + " : " + menuOption.getMenuOption());
-        }
-    }
-
-    private void DisplayResult(List<String> output) {
-        for (String result : output) {
-            writer.write(result);
-        }
-    }
-
-    private String readUserInput() {
-        return reader.read();
+            library.displayUserOptions();
+            userInput = reader.read();
+            Output output = library.performAction(userInput);
+            writer.write(output);
+        } while (!userInput.equals(QUIT_OPTION));
     }
 
 }

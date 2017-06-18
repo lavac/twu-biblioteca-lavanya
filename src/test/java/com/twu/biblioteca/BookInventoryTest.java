@@ -12,10 +12,12 @@ public class BookInventoryTest {
     public void shouldReturnTheListOfBooks() {
         BookInventory bookInventory = new BookInventory();
         List<Book> expectedBooks = new ArrayList<>();
+
         expectedBooks.add(new Book("2 States", "Chetan Bhagat", 2009));
         expectedBooks.add(new Book("The Alchemist", "Poulo coelho", 1999));
         expectedBooks.add(new Book("Five point someone", "unknown", 2012));
+        System.out.println(bookInventory.getAllBooks());
 
-        assertEquals(expectedBooks, bookInventory.getBooks());
+        assertEquals(expectedBooks, bookInventory.getAllBooks());
     }
 }

@@ -1,5 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.inputOuput;
 
+import com.twu.menu.Output;
 import com.twu.outputwriter.ConsoleOutputWriter;
 import org.junit.Test;
 import java.io.BufferedWriter;
@@ -13,10 +14,10 @@ public class ConsoleOutputWriterTest {
         StringWriter stringWriter = new StringWriter();
         BufferedWriter bufferedWriter = new BufferedWriter(stringWriter);
         ConsoleOutputWriter outputWriter = new ConsoleOutputWriter(bufferedWriter);
-        String expectedMessage = "Hi, Welcome to Biblioteca ...\n" ;
-        String input = "Hi, Welcome to Biblioteca ...";
+        String expectedMessage = "test output writer\n" ;
+        String input = "test output writer";
 
-        outputWriter.write(input);
+        outputWriter.write(new Output(input));
 
         assertEquals(expectedMessage, stringWriter.toString());
     }
