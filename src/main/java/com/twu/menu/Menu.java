@@ -1,5 +1,6 @@
 package com.twu.menu;
 
+import com.twu.biblioteca.Repository;
 import com.twu.outputwriter.OutputWriter;
 
 import java.util.HashMap;
@@ -7,15 +8,18 @@ import java.util.Map;
 
 public class Menu {
    private Map<String, MenuOptionProvider> menuOptions = null;
+    Repository repository;
 
-    public Menu() {
+
+    public Menu(Repository repository) {
+        this.repository = repository;
         menuOptions = new HashMap<>();
         makeMenu();
     }
 
     private void makeMenu() {
         menuOptions.put("1", new ListBooks());
-        menuOptions.put("2", new CheckOut());
+        menuOptions.put("2", new CheckOutBook());
         menuOptions.put("3", new Return());
         menuOptions.put("4", new Quit());
     }

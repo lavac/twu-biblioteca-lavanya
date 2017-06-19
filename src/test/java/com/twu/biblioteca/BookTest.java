@@ -19,5 +19,12 @@ public class BookTest {
             String bookInStringFormat = "2 States             | Chetan Bhagat        | 2009";
             assertTrue(bookInStringFormat.equals(book.toString()));
         }
+
+        @Test
+        public void shouldReturnBookName() {
+            Book book=new Book("2 States", "Chetan Bhagat", 2009);
+            String bookName = "2 States";
+            assertTrue(bookName.equals(book.getName()));
+        }
 }
 

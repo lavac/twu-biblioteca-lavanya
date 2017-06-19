@@ -1,6 +1,6 @@
 package com.twu.menu;
 
-import com.twu.biblioteca.BookInventory;
+import com.twu.biblioteca.Repository;
 import com.twu.models.TestConsoleInputReader;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class InvalidOptionTest {
 
         @Test
         public void shouldDisplayAnErrorMessageOnSelectionOfInvalidMenuOption() {
-            BookInventory bookInventory = new BookInventory();
+            Repository bookInventory = new Repository();
             String invalidMenuOption = "12";
             String expectedMessage = "Select a valid option!";
             List<String> expectedOutput = new ArrayList<>();

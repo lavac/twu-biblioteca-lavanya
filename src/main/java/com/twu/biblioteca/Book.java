@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Book {
+public class Book implements Item {
     private String name;
     private String author;
     private int yearOfPublication;
@@ -16,7 +16,7 @@ public class Book {
                              yearOfPublication
         );
     }
-
+    @Override
     public boolean equals(Object obj) {
         Book book = (Book) obj;
         if (this.name == book.name)

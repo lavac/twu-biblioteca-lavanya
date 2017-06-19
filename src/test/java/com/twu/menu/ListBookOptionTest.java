@@ -1,7 +1,7 @@
 package com.twu.menu;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.BookInventory;
+import com.twu.biblioteca.Item;
+import com.twu.biblioteca.Repository;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ public class ListBookOptionTest {
 
     @Test
     public void shouldDisplayAvailableBooks() {
+        Repository bookInventory = new Repository();
         ListBooks listBookOption = new ListBooks();
         List<String> expectedResult = new ArrayList<>();
         final String stringFormat = String.format("%-20s  %-20s %s", "Name",
@@ -21,8 +22,7 @@ public class ListBookOptionTest {
         );
 
         expectedResult.add(stringFormat);
-        BookInventory bookInventory = new BookInventory();
-        for (Book book : bookInventory.getAvailableBooks())
+        for (Item book : bookInventory.getAvailableItems())
             expectedResult.add(book.toString());
 
         assertEquals(expectedResult, listBookOption.executeMenuOption(bookInventory, null).getResponse());
@@ -30,6 +30,7 @@ public class ListBookOptionTest {
 
     @Test
     public void shouldDisplayMenuOption() {
+        Repository bookInventory = new Repository();
         ListBooks listBooks = new ListBooks();
         String expectedMenuOption = "List books";
 

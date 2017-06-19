@@ -7,18 +7,19 @@ import com.twu.menu.Response;
 import com.twu.outputwriter.OutputWriter;
 
 import static com.twu.constants.Constants.WELCOME_MESSAGE;
+//to do -: include test fro gerWelcome message and displayUserOptions
 
 class LibrarySystem {
-    private BookInventory bookInventory;
+    private Repository repository;
     private OutputWriter writer;
     private InputReader reader;
     private Menu menu;
 
     LibrarySystem(InputReader reader, OutputWriter writer) {
+        repository = new Repository();
         this.reader = reader;
         this.writer = writer;
-        menu = new Menu();
-        bookInventory = new BookInventory();
+        menu = new Menu(repository);
     }
 
     Response getWelcomeMessage() {
@@ -26,8 +27,8 @@ class LibrarySystem {
     }
 
     Response performAction(String userInput) {
-        MenuOptionProvider menuOption = new Menu().getMenuOption(userInput);
-        return menuOption.executeMenuOption(bookInventory, reader);
+        MenuOptionProvider menuOption = menu.getMenuOption(userInput);
+        return menuOption.executeMenuOption(repository,reader);
     }
 
     void displayUserOptions() {

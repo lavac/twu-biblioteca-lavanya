@@ -1,7 +1,7 @@
 package com.twu.menu;
 
 import com.twu.biblioteca.Book;
-import com.twu.biblioteca.BookInventory;
+import com.twu.biblioteca.Repository;
 import com.twu.models.TestConsoleInputReader;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -13,46 +13,46 @@ public class ReturnOptionTest {
 
     @Test
     public void returnedBookShouldBeAddedTotheAvailableBookList() {
-        BookInventory bookInventory = new BookInventory();
-        String book = "The Alchemist\n";
+        Repository repository = new Repository();
+        String book = "2 States\n";
 
-        CheckOut checkOut = new CheckOut();
+        CheckOutBook checkOut = new CheckOutBook();
         TestConsoleInputReader inputReader = new TestConsoleInputReader(book);
-        checkOut.executeMenuOption(bookInventory, inputReader);
+        checkOut.executeMenuOption(repository, inputReader);
 
         Return returnOption = new Return();
         TestConsoleInputReader inputReader1 = new TestConsoleInputReader(book);
         Book bookToBeReturned = new Book("The Alchemist", "Poulo coehlo", 1999);
-        returnOption.executeMenuOption(bookInventory, inputReader1);
+        returnOption.executeMenuOption(repository, inputReader1);
 
-        assertTrue(bookInventory.getAvailableBooks().contains(bookToBeReturned));
+        assertTrue(repository.getAvailableItems().contains(bookToBeReturned));
     }
 
     @Test
     public void customerShouldBeAbleToReturnTheCheckedOutBook() {
-        BookInventory bookInventory = new BookInventory();
+        Repository repository = new Repository();
 
-        String book = "The Alchemist\n";
-        CheckOut checkOut = new CheckOut();
+        String book = "2 States\n";
+        CheckOutBook checkOut = new CheckOutBook();
         TestConsoleInputReader inputReader = new TestConsoleInputReader(book);
-        checkOut.executeMenuOption(bookInventory, inputReader);
+        checkOut.executeMenuOption(repository, inputReader);
 
         Return returnOption = new Return();
         TestConsoleInputReader inputReader1 = new TestConsoleInputReader(book);
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("Thank you for returning the book.");
 
-        assertEquals(expectedResult, returnOption.executeMenuOption(bookInventory, inputReader1).getResponse());
+        assertEquals(expectedResult, returnOption.executeMenuOption(repository, inputReader1).getResponse());
     }
 
     @Test
     public void ShouldNotAcceptTheBookThatDoesnotBelongTtheRepository() {
-        BookInventory bookInventory = new BookInventory();
+        Repository repository = new Repository();
 
-        String checkedOutBook = "The Alchemist\n";
-        CheckOut checkOut = new CheckOut();
+        String checkedOutBook = "2 States\n";
+        CheckOutBook checkOut = new CheckOutBook();
         TestConsoleInputReader inputReader = new TestConsoleInputReader(checkedOutBook);
-        checkOut.executeMenuOption(bookInventory, inputReader);
+        checkOut.executeMenuOption(repository, inputReader);
 
         String bookToBeReturned = "Some Other Book\n";
         Return returnOption = new Return();
@@ -61,7 +61,7 @@ public class ReturnOptionTest {
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("That is not a valid book to return.");
 
-        assertEquals(expectedResult, returnOption.executeMenuOption(bookInventory, inputReader1).getResponse());
+        assertEquals(expectedResult, returnOption.executeMenuOption(repository, inputReader1).getResponse());
     }
 
     @Test

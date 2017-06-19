@@ -1,7 +1,8 @@
 package com.twu.menu;
 
 import com.twu.biblioteca.Book;
-import com.twu.biblioteca.BookInventory;
+import com.twu.biblioteca.Item;
+import com.twu.biblioteca.Repository;
 import com.twu.models.TestConsoleInputReader;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -13,48 +14,48 @@ public class CheckOutOptionTest {
 
     @Test
     public void checkedOutBookShouldNotBeDisplayedInAvailableBookList() {
-        BookInventory bookInventory = new BookInventory();
+        Repository repository = new Repository();
         String bookNameToBeCheckedOut = "The Alchemist\n";
         Book bookToBeCheckedOut = new Book("The Alchemist", "Poulo coehlo", 1999);
-        CheckOut checkOut = new CheckOut();
+        CheckOutBook checkOut = new CheckOutBook();
 
         TestConsoleInputReader inputReader = new TestConsoleInputReader(bookNameToBeCheckedOut);
 
-        checkOut.executeMenuOption(bookInventory, inputReader);
+        checkOut.executeMenuOption(repository, inputReader);
 
-        assertFalse(bookInventory.getAvailableBooks().contains(bookToBeCheckedOut));
+        assertFalse(repository.getAvailableItems().contains(bookToBeCheckedOut));
     }
 
     @Test
     public void bookShouldBeCheckedOUtIfItIsAvailable() {
-        BookInventory bookInventory = new BookInventory();
-        List<Book> availableBooks = bookInventory.getAvailableBooks();
+        Repository repository = new Repository();
+        List<Item> availableBooks = repository.getAvailableItems();
         String bookToBeCheckedOut = availableBooks.get(0).getName();
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("Thank you! Enjoy the book.");
 
         TestConsoleInputReader inputReader = new TestConsoleInputReader(bookToBeCheckedOut);
-        CheckOut checkOut = new CheckOut();
+        CheckOutBook checkOut = new CheckOutBook();
 
-        assertEquals(expectedResult, checkOut.executeMenuOption(bookInventory, inputReader).getResponse());
+        assertEquals(expectedResult, checkOut.executeMenuOption(repository, inputReader).getResponse());
     }
 
     @Test
     public void bookShouldNotBeCheckedOutIfItIsUnAvailable() {
-        BookInventory bookInventory = new BookInventory();
+        Repository repository = new Repository();
         String bookToBeCheckedOut = "UnAnAvailableBook\n";
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("That book is not available.");
 
         TestConsoleInputReader inputReader = new TestConsoleInputReader(bookToBeCheckedOut);
-        CheckOut checkOut = new CheckOut();
+        CheckOutBook checkOut = new CheckOutBook();
 
-        assertEquals(expectedResult, checkOut.executeMenuOption(bookInventory, inputReader).getResponse());
+        assertEquals(expectedResult, checkOut.executeMenuOption(repository, inputReader).getResponse());
     }
 
     @Test
     public void shouldDisplayMenuOption() {
-        CheckOut checkOut = new CheckOut();
+        CheckOutBook checkOut = new CheckOutBook();
         String expectedMenuOption = "Check out";
 
         assertEquals(expectedMenuOption, checkOut.getMenuOption());
