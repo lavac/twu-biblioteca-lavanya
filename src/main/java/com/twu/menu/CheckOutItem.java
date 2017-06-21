@@ -9,11 +9,6 @@ public class CheckOutBook implements MenuOptionProvider {
     @Override
     public Response executeMenuOption(Repository repository, InputReader reader) {
         String bookToBeCheckedOut = reader.read();
-        return repository.checkOutItem(bookToBeCheckedOut);
-    }
-
-    @Override
-    public String getMenuOption() {
-        return CHECK_OUT_MENU_OPTION;
+        return repository.checkOutBook(bookToBeCheckedOut, null);
     }
 }

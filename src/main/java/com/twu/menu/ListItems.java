@@ -10,11 +10,16 @@ import static com.twu.constants.Constants.STRING_FORMAT;
 
 public class ListBooks implements MenuOptionProvider {
 
+    String type;
+    ListBooks(String type) {
+        this.type = type;
+    }
 
     @Override
     public Response executeMenuOption(Repository repository, InputReader reader) {
-        List<Item> books = repository.getAvailableItems();
+        List<Item> books = repository.getItems("Book");
         List<String> booksInStringForm = toStringForm(books);
+        System.out.println(booksInStringForm);
         return new Response(booksInStringForm);
     }
 
@@ -26,7 +31,4 @@ public class ListBooks implements MenuOptionProvider {
         return stringForm;
     }
 
-    public String getMenuOption() {
-        return LIST_BOOK_MENU_OPTION;
-    }
 }
