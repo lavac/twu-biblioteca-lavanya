@@ -12,6 +12,7 @@ public class ConsoleInputReaderTest {
     public void shouldReadTheProvidedInput(){
         String expectedMessage = "test input reader" ;
         StringReader stringReader = new StringReader("test input reader");
+
         BufferedReader bufferedReader = new BufferedReader(stringReader);
         ConsoleInputReader inputReader = new ConsoleInputReader
                 (bufferedReader);

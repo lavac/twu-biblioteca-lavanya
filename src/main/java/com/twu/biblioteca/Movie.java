@@ -14,10 +14,11 @@ public class Movie implements Item {
     }
 
     public String toString() {
-        return String.format("%-20s | %-20s | %s | %s", name, director,
+        return String.format("%-30s | %-28s | %-18s | %-18s", name, director,
                              year, rating
         );
     }
+
     @Override
     public boolean equals(Object obj) {
         Movie movie = (Movie) obj;
@@ -29,5 +30,4 @@ public class Movie implements Item {
     public String getName() {
         return name;
     }
-
 }

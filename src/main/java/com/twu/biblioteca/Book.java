@@ -12,14 +12,15 @@ public class Book implements Item {
     }
 
     public String toString() {
-        return String.format("%-20s | %-20s | %s", name, author,
+        return String.format("%-20s | %-18s | %s", name, author,
                              yearOfPublication
         );
     }
+
     @Override
     public boolean equals(Object obj) {
         Book book = (Book) obj;
-        if (this.name == book.name)
+        if (book instanceof Book && this.name == book.name)
             return true;
         return false;
     }

@@ -9,19 +9,17 @@ import java.util.List;
 
 public class TestConsoleOutputWriter implements OutputWriter {
     private List<String> output;
+
     public TestConsoleOutputWriter() {
         output = new ArrayList<>();
     }
 
     @Override
     public void write(Response responseString) {
-        for(String out : responseString.getResponse())
-        output.add(out);
+        for (String out : responseString.getResponse())
+            output.add(out);
     }
 
-    public List<String> getOutput() {
-        return output;
-    }
 }
 
 

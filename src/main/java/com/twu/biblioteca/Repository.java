@@ -1,83 +1,75 @@
 package com.twu.biblioteca;
 
-
-import com.twu.constants.Status;
 import com.twu.menu.Response;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.twu.constants.Constants.*;
-import static com.twu.constants.Status.AVAILABLE;
-import static com.twu.constants.Status.CHECKEDOUT;
-
 public class Repository {
-    private Map<Item, Status> repository;
-    private List<Item> availableItems;
-    private List<Item> items;
 
-    public Repository() {
-        repository = new LinkedHashMap<>();
-        items = new ArrayList<>();
+    private Map<LibraryItem, User> checkedOutItems;
+    private List<LibraryItem> availableItems;
+    private List<Item> list;
+    UserAuthentication userAuthentication;
+
+    public Repository(UserAuthentication userAuthentication) {
+        this.userAuthentication = userAuthentication;
+        checkedOutItems = new LinkedHashMap<>();
+        availableItems = new ArrayList<>();
         makeRepository();
-        makeAListOfMovies();
     }
 
     private void makeRepository() {
-        repository.put(new Book("2 States", "Chetan Bhagat", 2009), AVAILABLE);
-        repository.put(new Book("The Alchemist", "Poulo coehlo", 1999), AVAILABLE);
-        repository.put(new Book("Five point someone", "Chetan Bhagat", 2012), AVAILABLE);
+        availableItems.add(new LibraryItem(new Book("2 States", "Chetan Bhagat", 2009), "book"));
+        availableItems.add(new LibraryItem(new Book("The Alchemist", "Poulo coehlo", 1999), "book"));
+        availableItems.add(new LibraryItem(new Book("Five point someone", "Chetan Bhagat", 2012), "book"));
+        availableItems.add(new LibraryItem(new Movie("Money ball", "Bennett Miller", 2011, 4), "movie"));
+        availableItems.add(new LibraryItem(new Movie("The Pursuit of Happyness", "Gabriele Muccino", 2006, 5), "movie"));
+        availableItems.add(new LibraryItem(new Movie("Crazy, Stupid, Love.", "Glenn Ficarra", 2011, 3), "movie"));
     }
 
-    private void makeAListOfMovies() {
-        for (Map.Entry<Item, Status> entry : repository.entrySet())
-            items.add(entry.getKey());
+    public Response checkOutItem(String itemName, String type) {
+        for (LibraryItem libraryItem : availableItems)
+            if ((libraryItem.getItem().getName().equals(itemName)) && libraryItem.getType().equals(type)) {
+                availableItems.remove(libraryItem);
+                addToCheckedOutList(libraryItem, userAuthentication.getUser());
+                return new Response("Thank you! Enjoy the " + type + "!\n");
+            }
+        return new Response("That " + type + " is not available!\n");
     }
 
-    List<Item> getAllItems() {
-        return items;
+    private void addToCheckedOutList(LibraryItem libraryItem, User user) {
+        checkedOutItems.put(libraryItem, user);
     }
 
+    public List<Item> getItems(String type) {
+        list = new ArrayList<>();
+        for (LibraryItem libraryItem : availableItems) {
+            if (type.equals(libraryItem.getType()))
+                list.add(libraryItem.getItem());
+        }
+        return list;
+    }
 
-
-    public List<Item> getAvailableItems() {
-        availableItems = new ArrayList<>();
-        for (Map.Entry<Item, Status> entry : repository.entrySet()) {
-            if (AVAILABLE == entry.getValue()) {
+    public Response returnItem(String itemName, String type) {
+        for (Map.Entry<LibraryItem, User> entry : checkedOutItems.entrySet()) {
+            if (itemName.equals(entry.getKey().getItem().getName())) {
+                checkedOutItems.remove(entry.getKey());
                 availableItems.add(entry.getKey());
+                return new Response("Thank you for returning the " + type + "!\n");
             }
         }
-        return availableItems;
+        return new Response("That is not a valid " + type + " to return!\n");
     }
 
-
-    public Response checkOutItem(String bookName) {
-        for (Item movie : getAvailableItems()) {
-            if (movie.getName().equals(bookName)) {
-                setAvailabilityStatus(bookName, CHECKEDOUT);
-                return new Response(CHECK_OUT_SUCCESS_MESSAGE);
+    public Map<Item, User> getCheckedOutItems(String type) {
+        Map<Item, User> items = new LinkedHashMap<>();
+        for (Map.Entry<LibraryItem, User> entry : checkedOutItems.entrySet()) {
+            if (type.equals(entry.getKey().getType())) {
+                items.put(entry.getKey().getItem(), entry.getValue());
             }
         }
-        return new Response(CHECK_OUT_FAILURE_MESSAGE);
-    }
-
-
-    public Response returnItem(String bookName) {
-        for (Map.Entry<Item, Status> entry : repository.entrySet()) {
-            if (bookName.equals(entry.getKey().getName()) && entry.getValue() == CHECKEDOUT) {
-                setAvailabilityStatus(bookName, AVAILABLE);
-                return new Response(RETURN_SUCCESS_MESSAGE);
-            }
-        }
-        return new Response(RETURN_FAILURE_MESSAGE);
-    }
-
-    private void setAvailabilityStatus(String bookName, Status status) {
-        for (Map.Entry<Item, Status> entry : repository.entrySet()) {
-            if (bookName.equals(entry.getKey().getName())) {
-                entry.setValue(status);
-            }
-        }
+        return items;
     }
 }

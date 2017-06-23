@@ -1,20 +1,14 @@
 package com.twu.menu;
 
+import com.twu.biblioteca.QuitProgramException;
 import com.twu.biblioteca.Repository;
 import com.twu.inputReader.InputReader;
-
-import static com.twu.constants.Constants.QUIT_MENU_OPTION;
-import static com.twu.constants.Constants.QUIT_MESSAGE;
+import com.twu.outputwriter.OutputWriter;
 
 public class Quit implements MenuOptionProvider {
 
     @Override
-    public Response executeMenuOption(Repository repository, InputReader reader) {
-        return new Response(QUIT_MESSAGE);
-    }
-
-    @Override
-    public String getMenuOption() {
-        return QUIT_MENU_OPTION;
+    public Response executeMenuOption(Repository repository, InputReader reader, OutputWriter writer) {
+        throw new QuitProgramException();
     }
 }

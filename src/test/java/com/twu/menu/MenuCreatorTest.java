@@ -1,5 +1,7 @@
-package com.twu.biblioteca;
+package com.twu.menu;
 
+import com.twu.biblioteca.Repository;
+import com.twu.biblioteca.UserAuthentication;
 import com.twu.models.TestMenuCreator;
 import org.junit.Test;
 

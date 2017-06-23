@@ -1,38 +1,41 @@
 package com.twu.biblioteca;
 
 import com.twu.inputReader.InputReader;
-import com.twu.menu.Menu;
-import com.twu.menu.MenuOptionProvider;
-import com.twu.menu.Response;
+import com.twu.menu.*;
 import com.twu.outputwriter.OutputWriter;
-
+import java.util.HashMap;
+import java.util.Map;
 import static com.twu.constants.Constants.WELCOME_MESSAGE;
-//to do -: include test fro gerWelcome message and displayUserOptions
 
-class LibrarySystem {
+public class LibrarySystem {
     private Repository repository;
     private OutputWriter writer;
     private InputReader reader;
-    private Menu menu;
+    MenuCreator menuCreator;
+    UserAuthentication userAuthentication;
+    Map<String, MenuProvider> selectMenu;
 
-    LibrarySystem(InputReader reader, OutputWriter writer) {
-        repository = new Repository();
+    protected LibrarySystem(InputReader reader, OutputWriter writer, UserAuthentication userAuthentication) {
+        repository = new Repository(userAuthentication);
+        selectMenu = new HashMap<>();
+        this.userAuthentication = userAuthentication;
+        menuCreator = new MenuCreator(repository, userAuthentication);
         this.reader = reader;
         this.writer = writer;
-        menu = new Menu(repository);
     }
 
-    Response getWelcomeMessage() {
+    public Response getWelcomeMessage() {
         return new Response(WELCOME_MESSAGE);
     }
 
     Response performAction(String userInput) {
-        MenuOptionProvider menuOption = menu.getMenuOption(userInput);
-        return menuOption.executeMenuOption(repository,reader);
+        MenuOptionProvider menuOption = menuCreator.getMenu().getMenuOption(userInput);
+        return menuOption.executeMenuOption(repository, reader, writer);
     }
 
-    void displayUserOptions() {
-        menu.displayMenu(writer);
+    protected void displayUserOptions() {
+        writer.write(new Response("Please select an option!"));
+        menuCreator.getMenu().displayMenu(writer);
     }
 }
 

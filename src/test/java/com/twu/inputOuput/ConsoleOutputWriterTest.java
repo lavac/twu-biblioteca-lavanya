@@ -14,8 +14,9 @@ public class ConsoleOutputWriterTest {
         StringWriter stringWriter = new StringWriter();
         BufferedWriter bufferedWriter = new BufferedWriter(stringWriter);
         ConsoleOutputWriter outputWriter = new ConsoleOutputWriter(bufferedWriter);
-        String expectedMessage = "test output writer\n" ;
+
         String input = "test output writer";
+        String expectedMessage = "test output writer\n" ;
 
         outputWriter.write(new Response(input));
 

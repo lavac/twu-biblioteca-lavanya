@@ -1,8 +1,5 @@
 package com.twu.biblioteca;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class LibraryItem {
     Item item;
     String type;

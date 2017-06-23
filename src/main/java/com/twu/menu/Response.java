@@ -18,4 +18,6 @@ public class Response {
     public List<String> getResponse() {
         return response;
     }
+
 }
+

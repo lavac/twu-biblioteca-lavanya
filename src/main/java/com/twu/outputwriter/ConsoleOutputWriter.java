@@ -15,7 +15,7 @@ public class ConsoleOutputWriter implements OutputWriter {
     @Override
     public void write(Response responseMessages) {
         try {
-            for(String output : responseMessages.getResponse())
+            for (String output : responseMessages.getResponse())
                 bufferedWriter.write(output + "\n");
             bufferedWriter.flush();
         } catch (IOException e) {

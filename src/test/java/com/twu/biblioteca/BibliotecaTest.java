@@ -1,48 +1,53 @@
 package com.twu.biblioteca;
 
+import com.twu.models.TestBiblioteca;
 import com.twu.models.TestConsoleInputReader;
 import com.twu.models.TestConsoleOutputWriter;
 import org.junit.Test;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BibliotecaTest {
 
     @Test
-    public void shouldDisplayMenuItemsOnWelcomeScreen(){
-        ArrayList<String> expectedOutput = new ArrayList<>();
-        expectedOutput.add("Hi, Welcome to Biblioteca ...");
-        expectedOutput.add("1 : List books");
-        expectedOutput.add("2 : Check out");
-        expectedOutput.add("3 : Return");
-        expectedOutput.add("4 : Quit");
-        expectedOutput.add("Thank you for using biblioteca :)");
-        String quitOption = "4\n";
-
+    public void shouldCallStartMethod() {
         TestConsoleOutputWriter outputWriter = new TestConsoleOutputWriter();
-        TestConsoleInputReader inputReader = new TestConsoleInputReader(quitOption);
+        TestConsoleInputReader inputReader = new TestConsoleInputReader("q\n");
+        TestBiblioteca testBiblioteca = new TestBiblioteca(inputReader, outputWriter);
 
-        Biblioteca biblioteca = new Biblioteca(inputReader,outputWriter);
-        biblioteca.start();
+        testBiblioteca.start();
 
-        assertEquals(expectedOutput, outputWriter.getOutput());
+        assertTrue(testBiblioteca.isBibliotecaStarted());
     }
 
+    @Test
+    public void shouldDisplayWelcomeMessage() {
+        TestConsoleOutputWriter outputWriter = new TestConsoleOutputWriter();
+        TestConsoleInputReader inputReader = new TestConsoleInputReader("q\n");
+        TestBiblioteca testBiblioteca = new TestBiblioteca(inputReader, outputWriter);
+
+        testBiblioteca.displayWelcomeMessage();
+
+        assertTrue(testBiblioteca.isWelcomeMessageDisplayed());
+    }
 
     @Test
     public void shouldKeepOnDisplayingMenuUntilUserQuit() {
-        String optionOne = "1\n";
-        String optionTwo = "1\n";
-        String optionThree = "4\n";
+        String optionOne = "3\n";
+        String optionTwo = "4\n";
+        String optionThree = "q\n";
         String inputOptions = optionOne + optionTwo + optionThree;
         int expectedNumberOfIterations = 3;
 
         TestConsoleOutputWriter outputWriter = new TestConsoleOutputWriter();
         TestConsoleInputReader inputReader = new TestConsoleInputReader(inputOptions);
 
-        Biblioteca biblioteca = new Biblioteca(inputReader,outputWriter);
-        biblioteca.start();
-
+        TestBiblioteca testBiblioteca = new TestBiblioteca(inputReader, outputWriter);
+        testBiblioteca.start();
         assertEquals(expectedNumberOfIterations, inputReader.getNumberOfIterations());
     }
 }

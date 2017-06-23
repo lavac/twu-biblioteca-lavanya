@@ -1,7 +1,36 @@
 package com.twu.models;
 
-/**
- * Created by lavanya on 6/22/17.
- */
-public class TestLibrarianMenu {
+import com.twu.biblioteca.Repository;
+import com.twu.biblioteca.UserAuthentication;
+import com.twu.menu.LibrarianMenu;
+import com.twu.menu.MenuOptionProvider;
+import com.twu.outputwriter.OutputWriter;
+
+public class TestLibrarianMenu extends LibrarianMenu {
+    private boolean isDisplayMenuCalled;
+    private boolean isGetMenuOptionCalled;
+
+    public TestLibrarianMenu(Repository repository) {
+        super(repository, new UserAuthentication());
+    }
+
+    public void displayMenu(OutputWriter writer) {
+        super.displayMenu(writer);
+        isDisplayMenuCalled = true;
+    }
+
+    public boolean isDisplayMenuCalled() {
+        return isDisplayMenuCalled;
+    }
+
+    public MenuOptionProvider getMenuOption(String userInput) {
+        MenuOptionProvider menuOptionProvider = super.getMenuOption(userInput);
+        isGetMenuOptionCalled = true;
+        return menuOptionProvider;
+    }
+
+    public boolean isGetMenuOptionCalled() {
+        return isGetMenuOptionCalled;
+    }
+
 }
